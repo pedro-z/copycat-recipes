@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Copycat Recipes We Love — Os sabores que você conhece. A versão que você vai testar.</title>
+  <meta name="description" content="Receitas autorais inspiradas em clássicos do fast food. Os clássicos direto da sua cozinha.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f0a1a;
+      --bg-card: #1a1229;
+      --bg-soft: #241833;
+      --pink: #ff4d8d;
+      --orange: #ff7a45;
+      --yellow: #ffe566;
+      --mint: #00e5a8;
+      --purple: #a855f7;
+      --cyan: #22d3ee;
+      --text: #fff8f0;
+      --text-muted: #c4b5d4;
+      --border: rgba(255,255,255,0.1);
+      --radius: 22px;
+      --shadow: 0 16px 40px rgba(0,0,0,0.4);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 15% 5%, rgba(255,77,141,0.22), transparent 55%),
+        radial-gradient(ellipse 55% 45% at 90% 15%, rgba(168,85,247,0.18), transparent 50%),
+        radial-gradient(ellipse 50% 40% at 50% 95%, rgba(0,229,168,0.12), transparent 45%),
+        radial-gradient(ellipse 40% 30% at 70% 60%, rgba(255,122,69,0.1), transparent 40%);
+      pointer-events: none;
+      z-index: 0;
+      animation: blobPulse 12s ease-in-out infinite alternate;
+    }
+
+    @keyframes blobPulse {
+      0% { opacity: 0.85; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.05); }
+    }
+
+    .particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      font-size: 1.1rem;
+      opacity: 0.35;
+      animation: floatUp linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.4; }
+      90% { opacity: 0.25; }
+      100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+    }
+
+    .container {
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 0 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(15,10,26,0.82);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 0;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: -0.02em;
+    }
+
+    .logo-mark {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, var(--pink), var(--orange));
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 16px rgba(255,77,141,0.45);
+      animation: logoBounce 2.8s ease-in-out infinite;
+    }
+
+    @keyframes logoBounce {
+      0%, 100% { transform: translateY(0) rotate(-3deg); }
+      50% { transform: translateY(-4px) rotate(3deg); }
+    }
+
+    .logo span {
+      background: linear-gradient(90deg, #fff, var(--yellow));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    nav { display: none; }
+
+    .btn-enter {
+      background: linear-gradient(135deg, rgba(255,77,141,0.2), rgba(168,85,247,0.2));
+      border: 1.5px solid rgba(255,77,141,0.45);
+      color: #fff;
+      font-family: inherit;
+      font-weight: 800;
+      font-size: 0.82rem;
+      padding: 9px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .btn-enter:hover {
+      transform: scale(1.06);
+      box-shadow: 0 0 20px rgba(255,77,141,0.4);
+      border-color: var(--pink);
+    }
+
+    /* HERO */
+    .hero {
+      padding: 24px 0 28px;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(90deg, rgba(255,77,141,0.2), rgba(168,85,247,0.2));
+      border: 1px solid rgba(255,77,141,0.35);
+      color: var(--pink);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 7px 14px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+      animation: badgePop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+
+    @keyframes badgePop {
+      from { opacity: 0; transform: scale(0.6); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.55rem, 6.5vw, 2rem);
+      font-weight: 700;
+      line-height: 1.18;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+      animation: fadeUp 0.7s ease 0.15s both;
+    }
+
+    .hero h1 .highlight {
+      background: linear-gradient(90deg, var(--yellow), var(--orange), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      background-size: 200% auto;
+      animation: shine 4s linear infinite;
+    }
+
+    @keyframes shine {
+      to { background-position: 200% center; }
+    }
+
+    .hero-sub {
+      color: var(--text-muted);
+      font-size: 1rem;
+      font-weight: 600;
+      max-width: 340px;
+      margin: 0 auto 20px;
+      animation: fadeUp 0.7s ease 0.25s both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-image-wrap {
+      position: relative;
+      margin: 18px auto 22px;
+      max-width: 100%;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(255,77,141,0.25), 0 0 0 1px var(--border);
+      animation: fadeUp 0.8s ease 0.35s both;
+    }
+
+    .hero-image-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .hero-image-wrap:hover img { transform: scale(1.03); }
+
+    .hero-image-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(15,10,26,0.5) 0%, transparent 45%);
+      pointer-events: none;
+    }
+
+    .float-emoji {
+      position: absolute;
+      font-size: 1.6rem;
+      z-index: 2;
+      animation: floatEmoji 3.5s ease-in-out infinite;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+    }
+
+    .float-emoji.e1 { top: 12%; left: 6%; animation-delay: 0s; }
+    .float-emoji.e2 { top: 18%; right: 8%; animation-delay: 0.8s; }
+    .float-emoji.e3 { bottom: 22%; left: 4%; animation-delay: 1.4s; }
+    .float-emoji.e4 { bottom: 18%; right: 6%; animation-delay: 2s; }
+
+    @keyframes floatEmoji {
+      0%, 100% { transform: translateY(0) rotate(-8deg); }
+      50% { transform: translateY(-10px) rotate(8deg); }
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 320px;
+      margin: 0 auto;
+      animation: fadeUp 0.7s ease 0.5s both;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: inherit;
+      font-weight: 800;
+      font-size: 1.02rem;
+      padding: 16px 22px;
+      border-radius: 16px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s;
+    }
+
+    .btn:active { transform: scale(0.96); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--pink), var(--orange));
+      color: #fff;
+      box-shadow: 0 10px 28px rgba(255,77,141,0.45);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 14px 32px rgba(255,77,141,0.55);
+    }
+
+    .btn-secondary {
+      background: var(--bg-soft);
+      color: var(--text);
+      border: 1.5px solid rgba(255,255,255,0.15);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--mint);
+      color: var(--mint);
+      transform: translateY(-2px);
+    }
+
+    /* SECTIONS */
+    section { padding: 28px 0; }
+
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .section-title span {
+      background: linear-gradient(90deg, var(--mint), var(--cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* How it works */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.25s, box-shadow 0.25s;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .step:nth-child(1) { animation-delay: 0.1s; }
+    .step:nth-child(2) { animation-delay: 0.2s; }
+    .step:nth-child(3) { animation-delay: 0.3s; }
+
+    .step:hover {
+      transform: translateY(-4px) scale(1.01);
+      border-color: rgba(255,77,141,0.4);
+      box-shadow: 0 12px 28px rgba(255,77,141,0.15);
+    }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 46px;
+      height: 46px;
+      background: linear-gradient(135deg, var(--pink), var(--orange));
+      color: #fff;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.2rem;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 6px 16px rgba(255,77,141,0.35);
+    }
+
+    .step-content h3 {
+      font-size: 1.08rem;
+      font-weight: 800;
+      margin-bottom: 3px;
+    }
+
+    .step-content p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* Recipe cards */
+    .recipes-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .recipe-card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: 22px;
+      overflow: hidden;
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      animation: fadeUp 0.6s ease both;
+      position: relative;
+    }
+
+    .recipe-card:nth-child(1)  { animation-delay: 0.05s; }
+    .recipe-card:nth-child(2)  { animation-delay: 0.08s; }
+    .recipe-card:nth-child(3)  { animation-delay: 0.11s; }
+    .recipe-card:nth-child(4)  { animation-delay: 0.14s; }
+    .recipe-card:nth-child(5)  { animation-delay: 0.17s; }
+    .recipe-card:nth-child(6)  { animation-delay: 0.20s; }
+    .recipe-card:nth-child(7)  { animation-delay: 0.23s; }
+    .recipe-card:nth-child(8)  { animation-delay: 0.26s; }
+    .recipe-card:nth-child(9)  { animation-delay: 0.29s; }
+    .recipe-card:nth-child(10) { animation-delay: 0.32s; }
+    .recipe-card:nth-child(11) { animation-delay: 0.35s; }
+    .recipe-card:nth-child(12) { animation-delay: 0.38s; }
+    .recipe-card:nth-child(13) { animation-delay: 0.41s; }
+    .recipe-card:nth-child(14) { animation-delay: 0.44s; }
+    .recipe-card:nth-child(15) { animation-delay: 0.47s; }
+
+    .recipe-card:hover {
+      transform: translateY(-6px) scale(1.015);
+      border-color: rgba(255,77,141,0.5);
+      box-shadow: 0 18px 36px rgba(255,77,141,0.22);
+    }
+
+    .recipe-card-img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .recipe-card:hover .recipe-card-img { transform: scale(1.06); }
+
+    .recipe-card-body {
+      padding: 16px 18px 18px;
+    }
+
+    .recipe-card-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 8px;
+    }
+
+    .tag-mac    { background: rgba(255,77,141,0.2); color: var(--pink); }
+    .tag-chip   { background: rgba(0,229,168,0.18); color: var(--mint); }
+    .tag-star   { background: rgba(34,211,238,0.2); color: var(--cyan); }
+    .tag-out    { background: rgba(255,122,69,0.2); color: var(--orange); }
+    .tag-wen    { background: rgba(168,85,247,0.2); color: var(--purple); }
+    .tag-taco   { background: rgba(255,229,102,0.18); color: var(--yellow); }
+    .tag-kfc    { background: rgba(255,122,69,0.22); color: #ff9a6c; }
+    .tag-pizza  { background: rgba(255,77,141,0.18); color: #ff7ab0; }
+    .tag-bk     { background: rgba(255,122,69,0.18); color: var(--orange); }
+    .tag-mad    { background: rgba(168,85,247,0.18); color: #c084fc; }
+    .tag-bobs   { background: rgba(255,229,102,0.2); color: #ffe566; }
+    .tag-molhos { background: rgba(0,229,168,0.15); color: var(--mint); }
+
+    .recipe-card h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.12rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+      letter-spacing: -0.02em;
+    }
+
+    .recipe-card p {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .recipe-card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 11px;
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--mint);
+    }
+
+    .recipe-card:hover .recipe-card-cta { color: var(--yellow); }
+    .recipe-card:hover .recipe-card-cta span { transform: translateX(4px); }
+    .recipe-card-cta span { transition: transform 0.25s; }
+
+    /* Disclaimer + footer */
+    .disclaimer {
+      text-align: center;
+      padding: 22px 0 20px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      font-weight: 600;
+      border-top: 1px solid var(--border);
+      margin-top: 12px;
+    }
+
+    footer {
+      text-align: center;
+      padding-bottom: 36px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    footer span { color: var(--pink); }
+
+    @media (min-width: 520px) {
+      .container { max-width: 560px; }
+
+      nav {
+        display: flex;
+        gap: 18px;
+        align-items: center;
+      }
+
+      nav a {
+        color: var(--text-muted);
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 700;
+        transition: color 0.2s;
+      }
+
+      nav a:hover { color: var(--pink); }
+
+      .hero-ctas {
+        flex-direction: row;
+        max-width: none;
+        justify-content: center;
+      }
+
+      .btn { flex: 1; max-width: 200px; }
+      .recipe-card-img { height: 220px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* SPLASH */
+    #splash {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #0f0a1a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      transition: opacity 0.7s ease, visibility 0.7s ease;
+    }
+
+    #splash.hide {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .splash-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 30% 20%, rgba(255,77,141,0.35), transparent 55%),
+        radial-gradient(ellipse 70% 50% at 80% 70%, rgba(168,85,247,0.3), transparent 50%),
+        radial-gradient(ellipse 50% 40% at 50% 50%, rgba(0,229,168,0.12), transparent 45%);
+      animation: splashPulse 2.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes splashPulse {
+      0% { opacity: 0.7; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.08); }
+    }
+
+    .splash-logo {
+      position: relative;
+      z-index: 2;
+      width: 96px;
+      height: 96px;
+      background: linear-gradient(135deg, #ff4d8d, #ff7a45);
+      border-radius: 28px;
+      display: grid;
+      place-items: center;
+      font-size: 3rem;
+      box-shadow: 0 12px 40px rgba(255,77,141,0.5), 0 0 0 6px rgba(255,77,141,0.15);
+      animation: splashLogoIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+
+    @keyframes splashLogoIn {
+      0% { opacity: 0; transform: scale(0.3) rotate(-20deg); }
+      100% { opacity: 1; transform: scale(1) rotate(0); }
+    }
+
+    .splash-title {
+      position: relative;
+      z-index: 2;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.45rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      background: linear-gradient(90deg, #fff, #ffe566, #ff4d8d);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      background-size: 200% auto;
+      animation: splashTitleIn 0.7s ease 0.25s both, shine 3s linear 1s infinite;
+    }
+
+    @keyframes splashTitleIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .splash-tag {
+      position: relative;
+      z-index: 2;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #c4b5d4;
+      animation: splashTitleIn 0.7s ease 0.4s both;
+    }
+
+    .splash-loader {
+      position: relative;
+      z-index: 2;
+      width: 48px;
+      height: 4px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 8px;
+      animation: splashTitleIn 0.6s ease 0.55s both;
+    }
+
+    .splash-loader::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 40%;
+      background: linear-gradient(90deg, #ff4d8d, #ffe566);
+      border-radius: 4px;
+      animation: loaderSlide 1.1s ease-in-out infinite;
+    }
+
+    @keyframes loaderSlide {
+      0% { left: -40%; }
+      100% { left: 100%; }
+    }
+
+    .splash-emojis {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .splash-emojis span {
+      position: absolute;
+      font-size: 1.6rem;
+      opacity: 0.5;
+      animation: splashFloat 3.5s ease-in-out infinite;
+    }
+
+    .splash-emojis span:nth-child(1) { top: 12%; left: 10%; animation-delay: 0s; }
+    .splash-emojis span:nth-child(2) { top: 18%; right: 12%; animation-delay: 0.5s; }
+    .splash-emojis span:nth-child(3) { bottom: 22%; left: 14%; animation-delay: 1s; }
+    .splash-emojis span:nth-child(4) { bottom: 16%; right: 10%; animation-delay: 1.4s; }
+    .splash-emojis span:nth-child(5) { top: 45%; left: 6%; animation-delay: 0.7s; font-size: 1.2rem; }
+    .splash-emojis span:nth-child(6) { top: 50%; right: 8%; animation-delay: 1.8s; font-size: 1.3rem; }
+
+    @keyframes splashFloat {
+      0%, 100% { transform: translateY(0) rotate(-10deg) scale(1); }
+      50% { transform: translateY(-14px) rotate(10deg) scale(1.15); }
+    }
+  </style>
+</head>
+<body>
+  <!-- SPLASH -->
+  <div id="splash" role="status" aria-live="polite">
+    <div class="splash-bg"></div>
+    <div class="splash-emojis" aria-hidden="true">
+      <span>🍔</span><span>🧪</span><span>🧀</span>
+      <span>✨</span><span>🍩</span><span>🔥</span>
+    </div>
+    <div class="splash-logo">🍔</div>
+    <div class="splash-title">Copycat Recipes We Love</div>
+    <div class="splash-tag">Os clássicos do fast food · versão 2.0</div>
+    <div class="splash-loader"></div>
+  </div>
+
+  <div class="particles" id="particles" aria-hidden="true"></div>
+
+  <header>
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-mark">🍔</div>
+        <span>Copycat Recipes</span>
+      </a>
+      <nav>
+        <a href="#como">Como funciona</a>
+        <a href="#receitas">Receitas</a>
+      </nav>
+      <button class="btn-enter" onclick="document.getElementById('receitas').scrollIntoView({behavior:'smooth'})">Explorar</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-badge">🔬 Lab de Sabores</div>
+        <h1>
+          Os sabores que você conhece.<br>
+          <span class="highlight">A versão que você vai testar.</span>
+        </h1>
+        <p class="hero-sub">
+          Receitas autorais inspiradas em clássicos do fast food. Direto da sua cozinha.
+        </p>
+
+        <div class="hero-image-wrap">
+          <span class="float-emoji e1">🧪</span>
+          <span class="float-emoji e2">🔥</span>
+          <span class="float-emoji e3">🧀</span>
+          <span class="float-emoji e4">✨</span>
+          <img src="hero-burger.webp" alt="Copycat Recipes We Love" width="800" height="1000" loading="eager">
+        </div>
+
+        <div class="hero-ctas">
+          <a href="#receitas" class="btn btn-primary">Ver todas as receitas</a>
+          <a href="#como" class="btn btn-secondary">Como funciona</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="como">
+      <div class="container">
+        <h2 class="section-title">Como <span>funciona</span></h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <h3>A gente decodifica</h3>
+              <p>Analisamos as técnicas e o equilíbrio de sabores dos clássicos mais amados.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <h3>Você prepara</h3>
+              <p>Receitas detalhadas, com ingredientes acessíveis e dicas de chef.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <h3>O resultado surpreende</h3>
+              <p>Frescor, qualidade e sabor que frequentemente superam o original.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="receitas">
+      <div class="container">
+        <h2 class="section-title">Todas as <span>receitas</span></h2>
+        <div class="recipes-grid">
+
+          <a href="bigmac.html" class="recipe-card">
+            <img src="01_indice.webp" alt="Hambúrguer Big Mac" class="recipe-card-img" width="480" height="190" loading="lazy">
+            <div class="recipe-card-body">
+              <span class="recipe-card-tag tag-mac">McDonald's</span>
+              <h3>Hambúrguer Big Mac</h3>
+              <p>Duas carnes, molho especial e pão triplo — versão lab.</p>
+              <div class="recipe-card-cta">Ver receita completa <span>→</span></div>
+            </div>
+          </a>
+
+          <a href="guacamole.html" class="recipe-card">
+            <img src="02_indice.webp" alt="Guacamole Cremosa" class="recipe-card-img" width="480" height="190" loading="lazy">
+            <div class="recipe-card-body">
+              <span class="recipe-card-tag tag-chip">Chipotle</span>
+              <h3>Guacamole Cremosa</h3>
+              <p>Abacate Hass, limão e jalapeño no ponto certo.</p>
+              <div class="recipe-card-cta">Ver receita completa <span>→</span></div>
+            </div>
+          </a>
+
+          <a href="frappuccino.html" class="recipe-card">
+            <img src="03_indice.webp" alt="Frappuccino de Caramelo" class="recipe-card-img" width="480" height="190" loading="lazy">
+            <div class="recipe-card-body">
+              <span class="recipe-card-tag tag-star">Starbucks</span>
+              <h3>Frappuccino de Caramelo</h3>
+              <p>Café gelado, calda de caramelo e chantilly viciante.</p>
+              <div class="recipe-card-cta">Ver receita completa <span>→</span></div>
+            </div>
+          </a>
+
+          <a href="iced-chai.html" class="recipe-card">
+            <img src="04_indice.webp" alt="Iced Chai Tea Latte" class="recipe-card-img" width="480" height="190" loading="lazy">
+            <div class="recipe-card-body">
+              <span class="recipe-card-tag tag-star">Starbucks</span>
+              <h3>Iced Chai Tea Latte</h3>
+              <p>Concentrado aromático de especiarias com leite gelado.</p>
+              <div class="recipe-card-cta">Ver receita completa <span>→</span></div>
+            </div>
+          </a>
+
+          <a href="bloomin-onion.html" class="recipe-card">
+            <img src="05_indice.webp" alt="Bloomin' Onion" class="recipe-card-img" width="480" height="190" loading="lazy">
+            <div class="recipe-card-body">
+              <span class="recipe-card-tag tag-out">Outback</span>
+              <h3>Bloomin' Onion</h3>
+              <p>Cebola empanada crocante e aberta como flor.</p>
+              <div class="recipe-card-cta">Ver receita completa <span>→</span></div>
+            </div>
+          </a>
+
+          <a href="ribs.html" class="recipe-card">
+            <img src="06_indice.webp" alt="Baby Back Ribs" class="recipe-card-img" width="480" height="190" loading="lazy">
+            <div class="recipe-card-body">
+              <span class="recipe-card-tag tag-out">Outback</span>
+              <h3>Baby Back Ribs</h3>
+              <p>Costela lenta com dry rub e molho barbecue caramelizado.</p>
+              <div class="recipe-card-cta">Ver receita completa <span>→</span></div>
+            </div>
+          </a>
+
+          <a href="frosty.html" class="recipe-card">
+            <img src="07_indice.webp" alt="Frosty de Chocolate" class="recipe-card-img" width="480" height="190" loading="lazy">
+            <div class="recipe-card-body">
+              <span class="recipe-card-tag tag-wen">Wendy's</span>
+              <h3>Frosty de Chocolate</h3>
+              <p>Textura híbrida entre sorvete e milk-shake.</p>
+              <div class="recipe-card-cta">Ver receita completa <span>→</span></div>
+            </div>
+          </a>
+
+          <a href="crunchwrap.html" class="recipe-card">
+            <img src="08_indice.webp" alt="Crunchwrap Supreme" class="recipe-card-img" width="480" height="190" loading="lazy">
+            <div class="recipe-card-body">
+              <span class="recipe-card-tag tag-taco">Taco Bell</span>
+              <h3>Crunchwrap Supreme</h3>
+              <p>Tortilla hexagonal com camada crocante no centro.</p>
+              <div class="recipe-card-cta">Ver receita completa <span>→</span></div>
+            </div>
+          </a>
+
+          <a href="frango.html" class="recipe-card">
+            <img src="09_indice.webp" alt="Frango Frito Crocante" class="recipe-card-img" width="480" height="190" loading="lazy">
+            <div class="recipe-card-body">
+              <span class="recipe-card-tag tag-kfc">KFC / Chick-fil-A</span>
+              <h3>Frango Frito Crocante</h3>
+              <p>Tenders com crosta escamosa e marinada de picles.</p>
+              <div class="recipe-card-cta">Ver receita completa <span>→</span></div>
+            </div>
+          </a>
+
+          <a href="pao-alho.html" class="recipe-card">
+            <img src="10_indice.webp" alt="Pão de Alho Recheado" class="recipe-card-img" width="480" height="190" loading="lazy">
+            <div class="recipe-card-body">
+              <span class="recipe-card-tag tag-pizza">Pizza Hut / Domino's</span>
+              <h3>Pão de Alho Recheado</h3>
+              <p>Baguete com manteiga de alho e muçarela derretida.</p>
+              <div class="recipe-card-cta">Ver receita completa <span>→</span></div>
+            </div>
+          </a>
+
+          <a href="batata.html" class="recipe-card">
+            <img src="11_indice.webp" alt="Batata Rústica Assada" class="recipe-card-img" width="480" height="190" loading="lazy">
+            <div class="recipe-card-body">
+              <span class="recipe-card-tag tag-bk">McDonald's / BK</span>
+              <h3>Batata Rústica Assada</h3>
+              <p>Gomos crocantes por fora, macios por dentro.</p>
+              <div class="recipe-card-cta">Ver receita completa <span>→</span></div>
+            </div>
+          </a>
+
+          <a href="burger-gourmet.html" class="recipe-card">
+            <img src="12_indice.webp" alt="Hambúrguer Gourmet Caseiro" class="recipe-card-img" width="480" height="190" loading="lazy">
+            <div class="recipe-card-body">
+              <span class="recipe-card-tag tag-mad">Madero / Jeronimo</span>
+              <h3>Hambúrguer Gourmet</h3>
+              <p>Blend 180g, brioche e queijo fundido no ponto.</p>
+              <div class="recipe-card-cta">Ver receita completa <span>→</span></div>
+            </div>
+          </a>
+
+          <a href="tacos.html" class="recipe-card">
+            <img src="13_indice.webp" alt="Tacos de Carne Moída" class="recipe-card-img" width="480" height="190" loading="lazy">
+            <div class="recipe-card-body">
+              <span class="recipe-card-tag tag-taco">Taco Bell</span>
+              <h3>Tacos de Carne Moída</h3>
+              <p>Conchas crocantes com tempero clássico e cheddar.</p>
+              <div class="recipe-card-cta">Ver receita completa <span>→</span></div>
+            </div>
+          </a>
+
+          <a href="ovomaltine.html" class="recipe-card">
+            <img src="14_indice.webp" alt="Milk-shake de Ovomaltine" class="recipe-card-img" width="480" height="190" loading="lazy">
+            <div class="recipe-card-body">
+              <span class="recipe-card-tag tag-bobs">Bob's / McDonald's</span>
+              <h3>Milk-shake de Ovomaltine</h3>
+              <p>Cremoso com flocos crocantes de malte.</p>
+              <div class="recipe-card-cta">Ver receita completa <span>→</span></div>
+            </div>
+          </a>
+
+          <a href="molhos.html" class="recipe-card">
+            <img src="15_indice.webp" alt="Tabela Mestra de Molhos" class="recipe-card-img" width="480" height="190" loading="lazy">
+            <div class="recipe-card-body">
+              <span class="recipe-card-tag tag-molhos">Extras</span>
+              <h3>Tabela Mestra de Molhos</h3>
+              <p>Bloom, ShackSauce, Cheddar Melt e mais.</p>
+              <div class="recipe-card-cta">Ver tabela completa <span>→</span></div>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="container">
+    <p class="disclaimer">
+      Nota: conteúdo autoral, não oficial e sem afiliação às marcas citadas.
+    </p>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 <span>Copycat Recipes We Love</span> · Feito com 🍔 e ciência</p>
+    </div>
+  </footer>
+
+  <script>
+    const particles = document.getElementById('particles');
+    const emojis = ['🍔','🍟','🍩','🍪','🧀','🧪','✨','🔥','🥤','🍕','🌮','🍗'];
+    for (let i = 0; i < 12; i++) {
+      const el = document.createElement('span');
+      el.className = 'particle';
+      el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      el.style.left = Math.random() * 100 + '%';
+      el.style.animationDuration = (8 + Math.random() * 12) + 's';
+      el.style.animationDelay = (Math.random() * 8) + 's';
+      el.style.fontSize = (0.9 + Math.random() * 0.8) + 'rem';
+      particles.appendChild(el);
+    }
+
+    const splash = document.getElementById('splash');
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        splash.classList.add('hide');
+        setTimeout(() => splash.remove(), 800);
+      }, 2200);
+    });
+  </script>
+</body>
+</html>
